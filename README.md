@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# Tic Tac Toe — React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. Project Overview
 
-## Available Scripts
+A responsive Tic Tac Toe game built with React that supports two-player gameplay and playing against a computer opponent. The application detects wins and draws, tracks scores, highlights winning combinations, and allows players to undo moves or restart games.
 
-In the project directory, you can run:
+## 2. Tech Stack
 
-### `npm start`
+- **React** — UI development using functional components and Hooks
+- **JavaScript (ES6+)** — Game logic and state management
+- **HTML5 and CSS3** — Structure, styling, and responsive layout
+- **Create React App** — Development and production build tooling
+- **Jest and React Testing Library** — Unit and component testing
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 3. Features Implemented
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Two-player mode: Player X and Player O take alternating turns.
+- Computer mode: Play against a computer opponent.
+- Win detection: Identifies winning rows, columns, and diagonals.
+- Winning-line highlight: Highlights the cells that form a winning combination.
+- Draw detection: Identifies a draw when the board is full without a winner.
+- Scoreboard: Tracks wins for X, wins for O, and draws.
+- Undo: Reverts the previous move; in computer mode, undoes the latest human-computer turn pair.
+- Reset Game: Starts a new game while preserving the scoreboard.
+- Reset Scoreboard: Clears accumulated scores.
+- Responsive layout: Supports desktop and mobile screen sizes.
+- Input validation: Prevents moves in occupied cells and after a game has ended.
 
-### `npm test`
+## 4. How to Run the Frontend Locally
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- Node.js
+- npm
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Clone the repository and navigate to the project directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/mmansoor403/Tic-Tac-Toe.git
+cd Tic-Tac-Toe
+npm install
+npm start
+```
 
-### `npm run eject`
+### Start the development server
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The application will open in your browser, typically at `http://localhost:3000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Create a production build
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm run build
+```
 
-## Learn More
+## 5. How to Run Tests
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Run the test suite once:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm test -- --watchAll=false
+```
 
-### Code Splitting
+Run tests with coverage reporting:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm test -- --watchAll=false --coverage
+```
 
-### Analyzing the Bundle Size
+The tests cover game logic, computer move selection, game state transitions, gameplay interactions, undo behavior, and scoreboard updates.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 6. AI Tools and Prompt Summary
 
-### Making a Progressive Web App
+AI assistance was used during development to support implementation planning, review game logic, identify edge cases, and improve test coverage.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Topics explored included:
 
-### Advanced Configuration
+- Structuring React components and separating styling.
+- Implementing winner and draw detection.
+- Designing computer move selection, including winning and blocking moves.
+- Handling undo, reset, and scoreboard behavior.
+- Writing unit and component tests.
+- Reviewing responsive styling and production readiness.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+AI-generated suggestions were reviewed and tested against the application's expected behavior.
 
-### Deployment
+**Tools used:** [chatGPT]
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 7. Design Decisions
 
-### `npm run build` fails to minify
+- **Component-based structure:** The game board, move history, scoreboard, and controls are separated into reusable components.
+- **Separation of concerns:** Core game rules and computer move selection are kept in a utility module rather than mixed into UI components.
+- **Reducer-based game state:** A reducer centralizes game transitions and validates actions such as making and undoing moves.
+- **Local state:** React state is sufficient for the game's board, turn, mode, and scores; no external state-management library is needed.
+- **Rule-based computer opponent:** The computer prioritizes winning moves, blocks immediate player wins, prefers the center, then available corners, and finally any remaining cell.
+- **No backend:** All game state is maintained in the browser, keeping the application simple and self-contained.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 8. Clarifications and Assumptions
+
+- The application is a frontend-only implementation and does not require a server or database.
+- The game supports two local players or one local player against the computer.
+- Player X starts each new game.
+- A completed game cannot accept further moves until it is reset or undone.
+- Resetting a game preserves the scoreboard; resetting the scoreboard clears scores separately.
+- In computer mode, undo removes the most recent human move and the computer's corresponding response when both exist.
+
+## 9. Known Limitations
+
+- The computer opponent uses a rule-based strategy rather than a complete minimax algorithm, so it is not guaranteed to play optimally.
+- Game state and scores are not persisted after refreshing or closing the browser.
+- Multiplayer is limited to two players on the same device.
+- There is no backend, online multiplayer, or user authentication.
+
+## 10. Future Improvements
+
+- Implement a minimax-based computer opponent for optimal play.
+- Persist scores using local storage.
+- Add configurable difficulty levels.
+- Improve accessibility with keyboard navigation and more comprehensive screen-reader announcements.
+- Add animations and enhanced visual feedback.
+- Introduce online multiplayer and persistent player statistics if backend support is added.
+
+---
+
+## Getting Started
+
+```bash
+npm install
+npm start
+```
+
+Run the tests with `npm test -- --watchAll=false`.
